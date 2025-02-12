@@ -1,0 +1,382 @@
+/* Base styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+.view {
+  display: none !important;
+  min-height: 100vh;
+}
+
+.view.active {
+  display: block !important;
+}
+
+/* Login View Styles */
+#loginView {
+  background-color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  width: 100%;
+  max-width: 28rem;
+  padding: 1rem;
+}
+
+.login-box {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.login-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+  color: #16a34a;
+  margin-bottom: 1.5rem;
+}
+
+.error {
+  color: #dc2626;
+  text-align: center;
+  font-size: 0.875rem;
+  margin-top: 0.5rem;
+}
+
+.login-button {
+  width: 100%;
+  padding: 0.5rem;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.login-button:hover {
+  background-color: #15803d;
+}
+
+/* Calculator View Styles */
+#calculatorView {
+  background-color: #fee2e2;
+}
+
+.container {
+  padding: 0.5rem;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+.form-container {
+  background-color: #fff8f7;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+.logo {
+  width: 8rem;
+  height: 8rem;
+}
+
+.title {
+  font-size: 1.875rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 1rem 0 2rem;
+  color: #299b38;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #299b38;
+  font-weight: 500;
+}
+
+.input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ffe5e0;
+  border-radius: 0.5rem;
+  transition: border-color 0.2s;
+}
+
+.input:focus {
+  border-color: #ff9f87;
+  outline: none;
+}
+
+.price-input-container {
+  position: relative;
+}
+
+.currency-symbol {
+  position: absolute;
+  left: 0.75rem;
+  top: 0.75rem;
+  color: #6b7280;
+}
+
+.price-input {
+  padding-left: 2rem;
+}
+
+.payment-date {
+  margin-top: 1.5rem;
+}
+
+.payment-date-title {
+  color: #299b38;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+
+.payment-date-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.select {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ffe5e0;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.calculations {
+  margin-top: 1.5rem;
+}
+
+.breakdown-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #299b38;
+}
+
+.breakdown-container {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #ffe5e0;
+}
+
+.breakdown-subtitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  color: #299b38;
+}
+
+.price-display {
+  margin-bottom: 1rem;
+}
+
+.price-label {
+  color: #299b38;
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+
+.price-value {
+  color: #ff9f87;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.note {
+  color: #6b7280;
+  margin-top: 1rem;
+}
+
+.create-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #ff9f87;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 1.5rem;
+  transition: background-color 0.2s;
+}
+
+.create-button:hover {
+  background-color: #ff8a6d;
+}
+
+/* Result View Styles */
+#resultView {
+  background-color: #f9fafb;
+  padding: 8px;
+}
+
+.header {
+  background-color: white;
+  border-radius: 8px 8px 0 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid #e5e7eb;
+  padding: 16px;
+  margin-bottom: 8px;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: #16a34a;
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background-color: #15803d;
+}
+
+.btn-secondary {
+  background-color: white;
+  border: 1px solid #d1d5db;
+}
+
+.btn-secondary:hover {
+  background-color: #f3f4f6;
+}
+
+.pdf-content {
+  background-color: white;
+  padding: 32px;
+  margin-top: 16px;
+}
+
+/* Grid styles for PDF */
+.grid {
+  border: 1px solid #e5e7eb;
+}
+
+.grid-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.grid-cell {
+  padding: 8px;
+  border-right: 1px solid #e5e7eb;
+}
+
+.breakdown-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 12px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.breakdown-section {
+  background-color: #ffe5e0;
+  padding: 8px;
+  font-weight: bold;
+}
+
+.payment-grid {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  padding: 8px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.highlighted {
+  background-color: #fefce8;
+}
+
+.text-right {
+  text-align: right;
+}
+
+.italic {
+  font-style: italic;
+}
+
+/* Responsive Styles */
+@media (min-width: 640px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .form-container {
+    padding: 1.5rem;
+  }
+
+  .logo {
+    width: 10rem;
+    height: 10rem;
+  }
+
+  .payment-date-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .price-value {
+    font-size: 1.875rem;
+  }
+
+  .header-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .button-group {
+    flex-direction: row;
+    gap: 12px;
+  }
+}

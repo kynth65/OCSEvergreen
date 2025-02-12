@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evergreen Realty PH OCS</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  </head>
+  <body>
+    <!-- Login View -->
+    <div id="loginView" class="view active">
+      <div class="login-container">
+        <div class="login-box">
+          <h1 class="login-title">
+            Evergreen Realty Philippines <br />
+            OCS
+          </h1>
+          <form id="loginForm">
+            <div class="form-group">
+              <label for="password">Enter Password</label>
+              <input
+                type="password"
+                id="password"
+                placeholder="Enter password to proceed"
+              />
+            </div>
+            <p id="error" class="error hidden"></p>
+            <button type="submit" class="login-button">Proceed</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Calculator View -->
+    <div id="calculatorView" class="view">
+      <div class="container">
+        <div class="form-container">
+          <div class="logo-container">
+            <img
+              src="./Evergreen Logo .png"
+              alt="Evergreen Logo"
+              class="logo"
+            />
+          </div>
+          <h1 class="title">Evergreen Realty PH OCS</h1>
+          <form id="calculatorForm">
+            <div class="form-group">
+              <label class="label">Client Name</label>
+              <input
+                type="text"
+                name="clientName"
+                class="input"
+                placeholder="Enter client name"
+              />
+            </div>
+            <div class="form-group">
+              <label class="label">Project</label>
+              <input
+                type="text"
+                name="project"
+                value="BEESCAPES"
+                class="input"
+              />
+            </div>
+            <div class="form-group">
+              <label class="label">Contact Number</label>
+              <input
+                type="tel"
+                name="phoneNumber"
+                class="input"
+                placeholder="Enter contact number"
+              />
+            </div>
+            <div class="form-group">
+              <label class="label">Reservation Date</label>
+              <input type="date" name="reservationDate" class="input" />
+            </div>
+            <div class="form-group">
+              <label class="label">Block and Lot Number</label>
+              <input
+                type="text"
+                name="blockLot"
+                class="input"
+                placeholder="Enter Block and Lot"
+              />
+            </div>
+            <div class="form-group">
+              <label class="label">Price per sq.m.</label>
+              <div class="price-input-container">
+                <span class="currency-symbol">₱</span>
+                <input
+                  type="number"
+                  name="pricePerSqm"
+                  class="input price-input"
+                  placeholder="0.00"
+                />
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label">Lot Area (sq.m.)</label>
+              <input
+                type="number"
+                name="lotArea"
+                class="input"
+                placeholder="Enter lot area"
+              />
+            </div>
+            <div class="payment-date">
+              <h3 class="payment-date-title">Date of Payment</h3>
+              <div class="payment-date-grid">
+                <div class="form-group">
+                  <label class="label">Month</label>
+                  <input
+                    type="text"
+                    name="paymentMonth"
+                    class="input"
+                    placeholder="Month"
+                  />
+                </div>
+                <div class="form-group">
+                  <label class="label">Year</label>
+                  <input
+                    type="text"
+                    name="paymentYear"
+                    class="input"
+                    placeholder="YYYY"
+                    maxlength="4"
+                  />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="label">Payment Type</label>
+              <select name="paymentType" class="select">
+                <option value="SPOTCASH">Spot Cash</option>
+                <option value="INSTALLMENT">Installment</option>
+              </select>
+            </div>
+            <div id="installmentYearsContainer" class="form-group hidden">
+              <label class="label">Installment Period</label>
+              <select name="installmentYears" class="select">
+                <option value="2">2 Years (24 months)</option>
+                <option value="3">3 Years (36 months)</option>
+                <option value="4">4 Years (48 months)</option>
+                <option value="5">5 Years (60 months)</option>
+                <option value="6">6 Years (72 months)</option>
+              </select>
+            </div>
+          </form>
+          <div id="calculations" class="calculations hidden">
+            <h2 class="breakdown-title">BREAKDOWN OF PAYMENT</h2>
+            <div class="breakdown-container">
+              <h3 id="paymentTypeTitle" class="breakdown-subtitle">
+                SPOTCASH PAYMENT
+              </h3>
+              <div class="price-display">
+                <span class="price-label">Total Contract Price:</span>
+                <span id="totalPrice" class="price-value">₱ 0.00</span>
+              </div>
+              <div id="installmentDetails" class="hidden">
+                <div class="price-display">
+                  <span class="price-label">Down Payment (20%):</span>
+                  <span id="downPayment" class="price-value">₱ 0.00</span>
+                </div>
+                <div class="price-display">
+                  <span class="price-label">Balance:</span>
+                  <span id="balance" class="price-value">₱ 0.00</span>
+                </div>
+                <div class="price-display">
+                  <span class="price-label">Monthly Payment:</span>
+                  <span id="monthlyPayment" class="price-value">₱ 0.00</span>
+                </div>
+                <div id="installmentTerms" class="note"></div>
+              </div>
+              <div id="spotcashNote" class="note">
+                Shall be payable within a month.<br />
+                Reservation fee ₱20,000.00 is deductible.
+              </div>
+            </div>
+          </div>
+          <button id="createOCS" class="create-button">Create OCS</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Result View -->
+    <div id="resultView" class="view">
+      <div class="container">
+        <div class="header">
+          <div class="header-content">
+            <h1 class="title">Official Computation Sheet Preview</h1>
+            <div class="button-group">
+              <button id="downloadPDF" class="btn btn-primary">
+                Download PDF
+              </button>
+              <button id="backToCalculator" class="btn btn-secondary">
+                Back to Calculator
+              </button>
+            </div>
+          </div>
+        </div>
+        <div id="pdfContent" class="pdf-content">
+          <!-- Will be populated by JavaScript -->
+        </div>
+      </div>
+    </div>
+
+    <script src="./index.js"></script>
+  </body>
+</html>
