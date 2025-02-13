@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     paymentType: "SPOTCASH",
     installmentYears: "2",
     paymentMonth: "",
+    paymentDay: "",
     paymentYear: "",
   };
 
@@ -283,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="payment-grid">
                 <div>Due Date</div>
-                <div class="text-right italic">${formData.paymentMonth} ${formData.paymentYear}</div>
+            <div class="text-right italic">${formData.paymentMonth} ${formData.paymentDay}, ${formData.paymentYear}</div>
             </div>
             
             <div class="payment-grid breakdown-section highlight-coral">
@@ -304,7 +305,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="payment-grid">
                 <div>Date Start</div>
-                <div class="text-right italic">${formData.paymentMonth} 30, ${formData.paymentYear}</div>
+            <div class="text-right italic">${formData.paymentMonth} ${formData.paymentDay}, ${formData.paymentYear}</div>
             </div>
             <div class="payment-grid">
                 <div>Date End</div>
@@ -332,7 +333,7 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="payment-grid">
                 <div>Due Date</div>
-                <div class="text-right italic">${formData.paymentMonth} ${formData.paymentYear}</div>
+            <div class="text-right italic">${formData.paymentMonth} ${formData.paymentDay}, ${formData.paymentYear}</div>
             </div>
             <div class="payment-grid">
                 <div>Total Amount</div>
