@@ -16,37 +16,67 @@ body {
 }
 
 .view.active {
-  display: block !important;
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 /* Login View Styles */
 #loginView {
-  background-color: #f3f4f6;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: linear-gradient(135deg, #fee2e2 0%, #ffd4d4 50%, #e8f5e9 100%);
+  min-height: 100vh;
+  width: 100%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
 
 .login-container {
   width: 100%;
-  max-width: 28rem;
+  max-width: 24rem;
   padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.login-logo {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  margin-bottom: 1rem;
 }
 
 .login-box {
   background-color: white;
   padding: 2rem;
-  border-radius: 0.5rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
 }
+
 
 .login-title {
   font-size: 1.5rem;
   font-weight: bold;
   text-align: center;
-  color: #16a34a;
-  margin-bottom: 1.5rem;
+  color: #299b38; /* Matching calculator green color */
+  margin-bottom: 2rem;
 }
+
 
 .error {
   color: #dc2626;
@@ -57,18 +87,26 @@ body {
 
 .login-button {
   width: 100%;
-  padding: 0.5rem;
-  background-color: #16a34a;
+  padding: 0.75rem;
+  background-color: #ff9f87; /* Matching calculator button color */
   color: white;
   border: none;
-  border-radius: 0.25rem;
+  border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.2s;
 }
 
 .login-button:hover {
-  background-color: #15803d;
+  background-color: #ff8a6d;
+}
+
+.password-input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 2px solid #ffe5e0;
+  border-radius: 0.5rem;
+  transition: border-color 0.2s;
 }
 
 /* Calculator View Styles */
@@ -297,9 +335,26 @@ body {
   margin-top: 16px;
 }
 
+.text-center.section {
+  margin-bottom: 40px;  /* More space after the header */
+}
+
+.section {
+  margin-bottom: 32px;  /* Space between major sections */
+}
+
+.section-title {
+  color: #000;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 16px;  /* Space between title and content */
+}
+
+
 /* Grid styles for PDF */
 .grid {
   border: 1px solid #e5e7eb;
+  margin-bottom: 24px;  /* Space after each grid */
 }
 
 .grid-row {
@@ -321,10 +376,13 @@ body {
   font-weight: bold;
 }
 
-.breakdown-section {
-  background-color: #ffe5e0;
-  padding: 8px;
+.breakdown-header {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;  /* Increased padding */
+  text-align: center;
   font-weight: bold;
+  margin-bottom: 16px;  /* Space after the header */
 }
 
 .payment-grid {
@@ -332,6 +390,19 @@ body {
   grid-template-columns: 1fr auto;
   padding: 8px;
   border-bottom: 1px solid #e5e7eb;
+}
+
+.payment-grid.breakdown-section.highlight-coral {
+  background-color: #ffe5e0;
+  font-weight: bold;
+  color: black;
+}
+
+.payment-grid.total-price-row {
+  background-color: white;
+  border-bottom: 1px solid #e5e7eb;
+  padding: 12px 8px;
+  font-weight: bold;
 }
 
 .highlighted {

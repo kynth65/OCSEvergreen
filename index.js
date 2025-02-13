@@ -266,11 +266,13 @@ document.addEventListener("DOMContentLoaded", function () {
   function generateInstallmentBreakdown() {
     return `
         <div class="grid">
-            <div class="payment-grid breakdown-section">
+            <div class="payment-grid total-price-row">
+                <div>TOTAL CONTRACT PRICE</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.totalPrice)}</div>
+            </div>
+            <div class="payment-grid breakdown-section highlight-coral">
                 <div>DOWNPAYMENT</div>
-                <div class="text-right">₱ ${formatCurrency(
-                  calculations.downPayment
-                )}</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.downPayment)}</div>
             </div>
             <div class="payment-grid">
                 <div>Reservation Fee</div>
@@ -278,22 +280,16 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="payment-grid">
                 <div>Down Payment</div>
-                <div class="text-right">₱ ${formatCurrency(
-                  calculations.downPayment - 20000
-                )}</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.downPayment - 20000)}</div>
             </div>
             <div class="payment-grid">
                 <div>Due Date</div>
-                <div class="text-right italic">${
-                  formData.paymentMonth
-                } ${formData.paymentYear}</div>
+                <div class="text-right italic">${formData.paymentMonth} ${formData.paymentYear}</div>
             </div>
             
-            <div class="payment-grid breakdown-section">
+            <div class="payment-grid breakdown-section highlight-coral">
                 <div>BALANCE PAYMENT</div>
-                <div class="text-right">₱ ${formatCurrency(
-                  calculations.balancePayment
-                )}</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.balancePayment)}</div>
             </div>
             <div class="payment-grid">
                 <div class="italic">${formData.installmentYears} years</div>
@@ -301,29 +297,19 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="payment-grid">
                 <div class="italic">Every 30th of the month</div>
-                <div class="text-right highlighted">₱ ${formatCurrency(
-                  calculations.monthlyPayment
-                )}</div>
+                <div class="text-right highlighted">₱ ${formatCurrency(calculations.monthlyPayment)}</div>
             </div>
             <div class="payment-grid">
-                <div class="italic">${
-                  parseInt(formData.installmentYears) * 12
-                } months</div>
+                <div class="italic">${parseInt(formData.installmentYears) * 12} months</div>
                 <div></div>
             </div>
             <div class="payment-grid">
                 <div>Date Start</div>
-                <div class="text-right italic">${
-                  formData.paymentMonth
-                } 30, ${formData.paymentYear}</div>
+                <div class="text-right italic">${formData.paymentMonth} 30, ${formData.paymentYear}</div>
             </div>
             <div class="payment-grid">
                 <div>Date End</div>
-                <div class="text-right italic">${calculateEndDate(
-                  formData.paymentMonth,
-                  formData.paymentYear,
-                  formData.installmentYears
-                )}</div>
+                <div class="text-right italic">${calculateEndDate(formData.paymentMonth, formData.paymentYear, formData.installmentYears)}</div>
             </div>
         </div>`;
   }
