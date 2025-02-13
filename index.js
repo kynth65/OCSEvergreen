@@ -112,7 +112,6 @@ document.addEventListener("DOMContentLoaded", function () {
       let monthlyPayment = 0;
 
       if (formData.paymentType === "INSTALLMENT") {
-        basePrice *= 1.1;
         downPayment = basePrice * 0.2;
         balance = basePrice - downPayment;
         const months = parseInt(formData.installmentYears) * 12;
