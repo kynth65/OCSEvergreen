@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function calculateEndDate(month, year, years) {
     if (!month || !year) return "Not specified";
-    const startDate = new Date(`${month} 30, ${year}`);
+    const startDate = new Date(`${month} ${formData.paymentDay}, ${year}`);
     const endDate = new Date(startDate);
     endDate.setFullYear(endDate.getFullYear() + parseInt(years));
     endDate.setMonth(endDate.getMonth() - 1);
