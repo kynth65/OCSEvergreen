@@ -317,11 +317,13 @@ document.addEventListener("DOMContentLoaded", function () {
   function generateSpotcashBreakdown() {
     return `
         <div class="grid">
-            <div class="payment-grid breakdown-section">
+            <div class="payment-grid total-price-row">
+                <div>TOTAL CONTRACT PRICE</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.totalPrice)}</div>
+            </div>
+            <div class="payment-grid breakdown-section highlight-coral">
                 <div>SPOTCASH</div>
-                <div class="text-right">₱ ${formatCurrency(
-                  calculations.totalPrice
-                )}</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.totalPrice)}</div>
             </div>
             <div class="payment-grid">
                 <div class="italic" style="color: #dc2626;">Shall be payable within a month, reservation fee</div>
@@ -331,15 +333,11 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
             <div class="payment-grid">
                 <div>Due Date</div>
-                <div class="text-right italic">${
-                  formData.paymentMonth
-                } ${formData.paymentYear}</div>
+                <div class="text-right italic">${formData.paymentMonth} ${formData.paymentYear}</div>
             </div>
             <div class="payment-grid">
                 <div>Total Amount</div>
-                <div class="text-right">₱ ${formatCurrency(
-                  calculations.totalPrice
-                )}</div>
+                <div class="text-right">₱ ${formatCurrency(calculations.totalPrice)}</div>
             </div>
         </div>`;
   }
