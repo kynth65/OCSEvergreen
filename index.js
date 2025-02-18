@@ -104,31 +104,30 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-  function calculatePrices() {
-    if (formData.pricePerSqm && formData.lotArea) {
-      let basePrice =
-        parseFloat(formData.pricePerSqm) * parseFloat(formData.lotArea);
-      let downPayment = 0;
-      let balance = 0;
-      let monthlyPayment = 0;
-
-      if (formData.paymentType === "INSTALLMENT") {
-        downPayment = basePrice * 0.2;
-        balance = basePrice - downPayment;
-        const months = parseInt(formData.installmentYears) * 12;
-        monthlyPayment = balance / months;
+    function calculatePrices() {
+      if (formData.pricePerSqm && formData.lotArea) {
+        let basePrice = parseFloat(formData.pricePerSqm) * parseFloat(formData.lotArea);
+        let downPayment = 0;
+        let balance = 0;
+        let monthlyPayment = 0;
+  
+        if (formData.paymentType === "INSTALLMENT") {
+          // Calculate 20% downpayment without including reservation fee
+          downPayment = basePrice * 0.2;
+          balance = basePrice - downPayment;
+          const months = parseInt(formData.installmentYears) * 12;
+          monthlyPayment = balance / months;
+        }
+  
+        calculations = {
+          totalPrice: basePrice,
+          downPayment, // This is now just the downpayment without reservation fee
+          monthlyPayment,
+          balancePayment: balance
+        };
+        updateCalculationsDisplay();
       }
-
-      calculations = {
-        totalPrice: basePrice,
-        downPayment,
-        monthlyPayment,
-        balancePayment: balance,
-      };
-
-      updateCalculationsDisplay();
     }
-  }
 
   function formatCurrency(amount) {
     return new Intl.NumberFormat("en-PH", {
@@ -266,7 +265,7 @@ document.addEventListener("DOMContentLoaded", function () {
   function generateInstallmentBreakdown() {
     return `
         <div class="grid">
-            <div class="payment-grid total-price-row">
+             <div class="payment-grid total-price-row">
                 <div>TOTAL CONTRACT PRICE</div>
                 <div class="text-right">₱ ${formatCurrency(calculations.totalPrice)}</div>
             </div>
@@ -279,12 +278,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 <div class="text-right">₱ 20,000.00</div>
             </div>
             <div class="payment-grid">
-                <div>Down Payment</div>
-                <div class="text-right">₱ ${formatCurrency(calculations.downPayment - 20000)}</div>
-            </div>
-            <div class="payment-grid">
                 <div>Due Date</div>
-            <div class="text-right italic">${formData.paymentMonth} ${formData.paymentDay}, ${formData.paymentYear}</div>
+                <div class="text-right italic">${formData.paymentMonth} ${formData.paymentDay}, ${formData.paymentYear}</div>
             </div>
             
             <div class="payment-grid breakdown-section highlight-coral">
