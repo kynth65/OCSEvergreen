@@ -68,7 +68,6 @@ body {
   align-items: center;
 }
 
-
 .login-title {
   font-size: 1.5rem;
   font-weight: bold;
@@ -76,7 +75,6 @@ body {
   color: #299b38; /* Matching calculator green color */
   margin-bottom: 2rem;
 }
-
 
 .error {
   color: #dc2626;
@@ -109,6 +107,89 @@ body {
   transition: border-color 0.2s;
 }
 
+/* Mode Selection View Styles */
+#modeSelectionView {
+  background: linear-gradient(135deg, #fee2e2 0%, #ffd4d4 50%, #e8f5e9 100%);
+  min-height: 100vh;
+  width: 100%;
+  animation: gradientBG 15s ease infinite;
+}
+
+.mode-selection-container {
+  width: 100%;
+  max-width: 24rem;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.mode-selection-box {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  align-items: center;
+}
+
+.mode-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.mode-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #ff9f87;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  font-size: 1rem;
+}
+
+.mode-button:hover {
+  background-color: #ff8a6d;
+}
+
+/* Mode Indicator */
+.mode-indicator {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ffe5e0;
+}
+
+.mode-title {
+  font-size: 1.25rem;
+  color: #299b38;
+  font-weight: bold;
+}
+
+.switch-mode-button {
+  padding: 0.5rem 1rem;
+  background-color: #e8f5e9;
+  color: #299b38;
+  border: 1px solid #299b38;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 500;
+}
+
+.switch-mode-button:hover {
+  background-color: #299b38;
+  color: white;
+}
+
 /* Calculator View Styles */
 #calculatorView {
   background-color: #fee2e2;
@@ -130,6 +211,7 @@ body {
 .logo-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 1rem;
 }
 
 .logo {
@@ -258,6 +340,13 @@ body {
   margin-top: 1rem;
 }
 
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
 .create-button {
   width: 100%;
   padding: 0.75rem;
@@ -267,12 +356,27 @@ body {
   border-radius: 0.5rem;
   font-weight: 500;
   cursor: pointer;
-  margin-top: 1.5rem;
   transition: background-color 0.2s;
 }
 
 .create-button:hover {
   background-color: #ff8a6d;
+}
+
+.reset-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: white;
+  color: #ff9f87;
+  border: 1px solid #ff9f87;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.reset-button:hover {
+  background-color: #ffe5e0;
 }
 
 /* Result View Styles */
@@ -433,7 +537,7 @@ body {
   }
 
   .payment-date-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .price-value {
@@ -449,5 +553,14 @@ body {
   .button-group {
     flex-direction: row;
     gap: 12px;
+  }
+
+  .action-buttons {
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .create-button, .reset-button {
+    flex: 1;
   }
 }

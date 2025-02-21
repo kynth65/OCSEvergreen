@@ -1,7 +1,10 @@
 document.addEventListener("DOMContentLoaded", function () {
-  console.log("DOM loaded"); // View Management
+  console.log("DOM loaded"); 
+  
+  // View Management
   const views = {
     login: document.getElementById("loginView"),
+    modeSelection: document.getElementById("modeSelectionView"),
     calculator: document.getElementById("calculatorView"),
     result: document.getElementById("resultView"),
   };
@@ -9,9 +12,13 @@ document.addEventListener("DOMContentLoaded", function () {
   // Debug check if elements are found
   console.log("Views found:", {
     login: !!views.login,
+    modeSelection: !!views.modeSelection,
     calculator: !!views.calculator,
     result: !!views.result,
   });
+
+  // App state
+  let appMode = "full"; // "full" or "calculator-only"
 
   function showView(viewName) {
     console.log("Attempting to show view:", viewName);
@@ -41,20 +48,64 @@ document.addEventListener("DOMContentLoaded", function () {
     const password = document.getElementById("password").value;
     const error = document.getElementById("error");
 
-    console.log("Form submitted"); // Debug log
-    console.log("Password entered:", password); // Debug log
+    console.log("Form submitted");
+    console.log("Password entered:", password);
 
     if (password === "OCSGREEN") {
-      console.log("Password correct"); // Debug log
+      console.log("Password correct");
       localStorage.setItem("isAuthenticated", "true");
-      showView("calculator");
+      showView("modeSelection");
     } else {
-      console.log("Password incorrect"); // Debug log
+      console.log("Password incorrect");
       error.textContent = "Incorrect password. Please try again.";
       error.classList.remove("hidden");
       document.getElementById("password").value = "";
     }
   });
+
+  // Mode Selection Logic
+  document.getElementById("fullOcsMode").addEventListener("click", function() {
+    appMode = "full";
+    updateAppMode();
+    showView("calculator");
+  });
+
+  document.getElementById("calculatorOnlyMode").addEventListener("click", function() {
+    appMode = "calculator-only";
+    updateAppMode();
+    showView("calculator");
+  });
+
+  // Mode Switch Logic
+  document.getElementById("switchMode").addEventListener("click", function() {
+    showView("modeSelection");
+  });
+
+  function updateAppMode() {
+    const clientInfoSection = document.getElementById("clientInfoSection");
+    const paymentDetailsSection = document.getElementById("paymentDetailsSection");
+    const calculatorPaymentTypeSection = document.getElementById("calculatorPaymentTypeSection");
+    const createOCSButton = document.getElementById("createOCS");
+    const modeTitle = document.getElementById("modeTitle");
+
+    if (appMode === "calculator-only") {
+      // Hide OCS sections
+      clientInfoSection.classList.add("hidden");
+      paymentDetailsSection.classList.add("hidden");
+      // Show calculator payment type options
+      calculatorPaymentTypeSection.classList.remove("hidden");
+      createOCSButton.textContent = "Calculate";
+      modeTitle.textContent = "Quick Calculator";
+    } else {
+      // Show OCS sections
+      clientInfoSection.classList.remove("hidden");
+      paymentDetailsSection.classList.remove("hidden");
+      // Hide calculator payment type options
+      calculatorPaymentTypeSection.classList.add("hidden");
+      createOCSButton.textContent = "Create OCS";
+      modeTitle.textContent = "Official Computation Sheet";
+    }
+  }
 
   // Calculator View Logic
   let formData = {
@@ -90,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
 
-  // Handle payment type changes
+  // Handle payment type changes for full OCS mode
   document
     .querySelector('select[name="paymentType"]')
     .addEventListener("change", function (e) {
@@ -103,31 +154,58 @@ document.addEventListener("DOMContentLoaded", function () {
         installmentYearsContainer.classList.add("hidden");
       }
     });
-
-    function calculatePrices() {
-      if (formData.pricePerSqm && formData.lotArea) {
-        let basePrice = parseFloat(formData.pricePerSqm) * parseFloat(formData.lotArea);
-        let downPayment = 0;
-        let balance = 0;
-        let monthlyPayment = 0;
-  
-        if (formData.paymentType === "INSTALLMENT") {
-          // Calculate 20% downpayment without including reservation fee
-          downPayment = basePrice * 0.2;
-          balance = basePrice - downPayment;
-          const months = parseInt(formData.installmentYears) * 12;
-          monthlyPayment = balance / months;
-        }
-  
-        calculations = {
-          totalPrice: basePrice,
-          downPayment, // This is now just the downpayment without reservation fee
-          monthlyPayment,
-          balancePayment: balance
-        };
-        updateCalculationsDisplay();
+    
+  // Handle payment type changes for calculator-only mode
+  document
+    .querySelector('select[name="calculatorPaymentType"]')
+    .addEventListener("change", function (e) {
+      const calculatorInstallmentYearsContainer = document.getElementById(
+        "calculatorInstallmentYearsContainer"
+      );
+      if (e.target.value === "INSTALLMENT") {
+        calculatorInstallmentYearsContainer.classList.remove("hidden");
+      } else {
+        calculatorInstallmentYearsContainer.classList.add("hidden");
       }
+      
+      // Sync value with the main payment type
+      formData.paymentType = e.target.value;
+      calculatePrices();
+    });
+    
+  // Handle installment years changes for calculator-only mode
+  document
+    .querySelector('select[name="calculatorInstallmentYears"]')
+    .addEventListener("change", function (e) {
+      // Sync value with the main installment years
+      formData.installmentYears = e.target.value;
+      calculatePrices();
+    });
+
+  function calculatePrices() {
+    if (formData.pricePerSqm && formData.lotArea) {
+      let basePrice = parseFloat(formData.pricePerSqm) * parseFloat(formData.lotArea);
+      let downPayment = 0;
+      let balance = 0;
+      let monthlyPayment = 0;
+
+      if (formData.paymentType === "INSTALLMENT") {
+        // Calculate 20% downpayment without including reservation fee
+        downPayment = basePrice * 0.2;
+        balance = basePrice - downPayment;
+        const months = parseInt(formData.installmentYears) * 12;
+        monthlyPayment = balance / months;
+      }
+
+      calculations = {
+        totalPrice: basePrice,
+        downPayment, // This is now just the downpayment without reservation fee
+        monthlyPayment,
+        balancePayment: balance
+      };
+      updateCalculationsDisplay();
     }
+  }
 
   function formatCurrency(amount) {
     return new Intl.NumberFormat("en-PH", {
@@ -178,10 +256,48 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   document.getElementById("createOCS").addEventListener("click", function () {
+    // For both modes, calculate prices first
+    calculatePrices();
+    
+    // For calculator-only mode, just show the calculations and return
+    if (appMode === "calculator-only") {
+      return;
+    }
+    
+    // For full OCS mode, proceed to result view
     localStorage.setItem("formData", JSON.stringify(formData));
     localStorage.setItem("calculations", JSON.stringify(calculations));
     showView("result");
     loadResult();
+  });
+  
+  // Reset button functionality
+  document.getElementById("resetCalculator").addEventListener("click", function() {
+    // Reset form inputs
+    document.getElementById("calculatorForm").reset();
+    
+    // Reset form data
+    formData = {
+      clientName: "",
+      project: "BEESCAPES",
+      phoneNumber: "",
+      reservationDate: "",
+      blockLot: "",
+      pricePerSqm: "",
+      lotArea: "",
+      paymentType: "SPOTCASH",
+      installmentYears: "2",
+      paymentMonth: "",
+      paymentDay: "",
+      paymentYear: "",
+    };
+    
+    // Reset payment type displays
+    document.getElementById("installmentYearsContainer").classList.add("hidden");
+    document.getElementById("calculatorInstallmentYearsContainer").classList.add("hidden");
+    
+    // Hide calculations
+    document.getElementById("calculations").classList.add("hidden");
   });
 
   // Result View Logic
@@ -364,7 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!isAuthenticated) {
       showView("login");
     } else {
-      showView("calculator");
+      showView("modeSelection");
     }
   }
 
